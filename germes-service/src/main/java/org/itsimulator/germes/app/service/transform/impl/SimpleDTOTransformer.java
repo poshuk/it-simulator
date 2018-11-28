@@ -3,6 +3,7 @@ package org.itsimulator.germes.app.service.transform.impl;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.itsimulator.germes.app.infra.util.Checks;
+import org.itsimulator.germes.app.infra.util.CommonUtil;
 import org.itsimulator.germes.app.infra.util.ReflectionUtil;
 import org.itsimulator.germes.app.model.entity.base.AbstractEntity;
 import org.itsimulator.germes.app.rest.dto.base.BaseDTO;
@@ -21,7 +22,7 @@ public class SimpleDTOTransformer implements Transformer{
         ReflectionUtil.copyFields(entity, dto, ReflectionUtil.findSimilarFields(entity.getClass(), clz));
         dto.transform(entity);
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("SimpleDTOTransformer.transform: {} DTO Object", ReflectionToStringBuilder.toString(dto, ToStringStyle.SHORT_PREFIX_STYLE));
+            LOGGER.debug("SimpleDTOTransformer.transform: {} DTO Object", CommonUtil.toString(dto));
         }
         return dto;
     }
@@ -37,6 +38,10 @@ public class SimpleDTOTransformer implements Transformer{
         T entity = ReflectionUtil.createInstance(clz);
         ReflectionUtil.copyFields(dto, entity, ReflectionUtil.findSimilarFields(dto.getClass(), clz));
         dto.untransform(entity);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("SimpleDTOTransformer.transform: {} entity",
+                    CommonUtil.toString(dto));
+        }
         return entity;
     }
 }

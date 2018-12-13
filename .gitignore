@@ -5,6 +5,7 @@ target/
 .classpath
 .project
 .log
+.iml
 
 # User-specific stuff:
 .idea/workspace.xml

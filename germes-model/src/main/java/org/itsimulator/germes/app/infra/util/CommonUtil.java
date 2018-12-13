@@ -35,6 +35,12 @@ public class CommonUtil {
 		return Collections.unmodifiableList(Optional.ofNullable(source).orElse(Collections.emptyList()));
 	}
 
+	/**
+	 * Dynamically converts param into string representation using all
+	 * object state 
+	 * @param param
+	 * @return
+	 */
 	public static String toString(Object param){
 	    return ReflectionToStringBuilder.toString(param, ToStringStyle.SHORT_PREFIX_STYLE);
     }

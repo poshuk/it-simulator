@@ -9,8 +9,8 @@ import org.itsimulator.germes.app.model.search.criteria.StationCriteria;
 import org.itsimulator.germes.app.model.search.criteria.range.RangeCriteria;
 
 /**
- * Entry point to perform operations
- * over geographic entities
+ * Entry point to perform operations over geographic entities
+ * 
  * @author Morenets
  *
  */
@@ -18,20 +18,33 @@ public interface GeographicService {
 
 	/**
 	 * Returns list of existing cities
+	 * 
 	 * @return
 	 */
 	List<City> findCities();
-	
+
+	/**
+	 * Returns city with specified identifier. If no city is found then empty optional is
+	 * returned
+	 * 
+	 * @param id
+	 * @return
+	 */
+	Optional<City> findCitiyById(int id);
+
+	/**
+	 * Returns all the stations that match specified criteria
+	 * @param criteria
+	 * @param rangeCriteria
+	 * @return
+	 */
+	List<Station> searchStations(StationCriteria criteria, RangeCriteria rangeCriteria);
+
 	/**
 	 * Saves specified city instance
+	 * 
 	 * @param city
 	 */
 	void saveCity(City city);
-
-	Optional<City> findCityById(int id);
-	List<Station> searchStations(StationCriteria criteria, RangeCriteria rangeCriteria);
-
-
-	
 
 }

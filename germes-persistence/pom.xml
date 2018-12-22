@@ -6,4 +6,12 @@
     <version>0.1.8</version>
   </parent>
   <artifactId>germes-persistence</artifactId>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.it-simulator</groupId>
+      <artifactId>germes-model</artifactId>
+      <version>0.1.8</version>
+    </dependency>
+  </dependencies>
 </project>

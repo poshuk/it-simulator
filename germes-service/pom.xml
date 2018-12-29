@@ -64,6 +64,11 @@
             <version>${powermock.version}</version>
             <scope>test</scope>
         </dependency>
+		<dependency>
+			<groupId>org.it-simulator</groupId>
+			<artifactId>germes-persistence</artifactId>
+			<version>0.1.8</version>
+		</dependency>
 
 	</dependencies>
 </project>

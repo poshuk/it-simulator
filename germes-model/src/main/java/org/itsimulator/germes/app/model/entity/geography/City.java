@@ -8,6 +8,8 @@ import org.itsimulator.germes.app.infra.util.CommonUtil;
 import org.itsimulator.germes.app.model.entity.base.AbstractEntity;
 import org.itsimulator.germes.app.model.entity.transport.TransportType;
 
+import javax.persistence.Column;
+
 /**
  * Any locality that contains transport stations
  * @author Morenets
@@ -37,6 +39,7 @@ public class City extends AbstractEntity {
 		this.name = name;
 	}
 
+	@Column(name = "NAME", nullable = false, length = 32)
 	public String getName() {
 		return name;
 	}
@@ -53,6 +56,7 @@ public class City extends AbstractEntity {
 		this.district = district;
 	}
 
+	@Column(name = "REGION", nullable = false, length = 32)
 	public String getRegion() {
 		return region;
 	}

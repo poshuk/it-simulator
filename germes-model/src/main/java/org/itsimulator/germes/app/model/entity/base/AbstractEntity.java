@@ -4,11 +4,14 @@ import java.time.LocalDateTime;
 
 import org.itsimulator.germes.app.model.entity.person.Account;
 
+import javax.persistence.*;
+
 /**
  * Base class for all business entities
  * @author Morenets
  *
  */
+@MappedSuperclass
 public abstract class AbstractEntity {
 	/**
 	 * Unique entity identifier
@@ -35,6 +38,8 @@ public abstract class AbstractEntity {
 	 */
 	private Account modifiedBy;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int getId() {
 		return id;
 	}
@@ -43,6 +48,7 @@ public abstract class AbstractEntity {
 		this.id = id;
 	}
 
+	@Column (name = "CREATED_AT", nullable = false, updatable = false)
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
@@ -51,6 +57,7 @@ public abstract class AbstractEntity {
 		this.createdAt = createdAt;
 	}
 
+	@Column (name = "MODIFIED_AT", insertable = false)
 	public LocalDateTime getModifiedAt() {
 		return modifiedAt;
 	}

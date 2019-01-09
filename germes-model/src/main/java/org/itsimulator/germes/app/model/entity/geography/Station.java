@@ -7,6 +7,10 @@ import org.itsimulator.germes.app.model.entity.base.AbstractEntity;
 import org.itsimulator.germes.app.model.entity.transport.TransportType;
 import org.itsimulator.germes.app.model.search.criteria.StationCriteria;
 
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
 /**
  * Station where passengers can get off or take specific kind
  * of transport. Multiple stationts compose route of the trip.  
@@ -66,6 +70,8 @@ public class Station extends AbstractEntity {
 		this.coordinate = coordinate;
 	}
 
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false, name = "TRANSPORT_TYPE")
 	public TransportType getTransportType() {
 		return transportType;
 	}

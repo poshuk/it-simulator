@@ -7,9 +7,7 @@ import org.itsimulator.germes.app.model.entity.base.AbstractEntity;
 import org.itsimulator.germes.app.model.entity.transport.TransportType;
 import org.itsimulator.germes.app.model.search.criteria.StationCriteria;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
 
 /**
  * Station where passengers can get off or take specific kind
@@ -42,6 +40,8 @@ public class Station extends AbstractEntity {
 		this.transportType = Objects.requireNonNull(transportType);
 	}
 
+	@ManyToOne(cascade = {}, fetch = FetchType.EAGER)
+	@JoinColumn(name = "CITY_ID")
 	public City getCity() {
 		return city;
 	}
@@ -132,7 +132,4 @@ public class Station extends AbstractEntity {
 			return false;
 		return true;
 	}
-	
-	
-
 }

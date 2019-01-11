@@ -8,7 +8,10 @@ import org.itsimulator.germes.app.infra.util.CommonUtil;
 import org.itsimulator.germes.app.model.entity.base.AbstractEntity;
 import org.itsimulator.germes.app.model.entity.transport.TransportType;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 
 /**
  * Any locality that contains transport stations
@@ -65,6 +68,7 @@ public class City extends AbstractEntity {
 		this.region = region;
 	}
 
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "city", orphanRemoval = true)
 	public Set<Station> getStations() {		
 		return CommonUtil.getSafeSet(stations);
 	}

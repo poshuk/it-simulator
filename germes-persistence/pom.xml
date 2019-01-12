@@ -13,5 +13,12 @@
       <artifactId>germes-model</artifactId>
       <version>0.1.8</version>
     </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-tools</artifactId>
+      <version>5.4.0.Final</version>
+      <scope>test</scope>
+    </dependency>
+
   </dependencies>
 </project>

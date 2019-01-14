@@ -16,6 +16,7 @@ public class ComponentBinder extends AbstractBinder{
         bind(InMemoryCityRepository.class).to(CityRepository.class).in(Singleton.class);
         bind(SimpleDTOTransformer.class).to(Transformer.class).in(Singleton.class);
         bind(GeographicServiceImpl.class).to(GeographicService.class).in(Singleton.class);
+		bind(SessionFactoryBuilder.class).to(SessionFactoryBuilder.class).in(Singleton.class);
     }
 
 }

@@ -64,6 +64,12 @@ public class ReflectionUtil {
 		}
 	}
 
+	/***
+	 * Returns all declared fields of the specified classes and all superclasses
+	 * 
+	 * @param cls
+	 * @return
+	 */
 	public static <T> List<Field> getFields(Class<?> cls){
         List<Field> fields = new ArrayList<>();
         while (cls!=null){
@@ -110,6 +116,14 @@ public class ReflectionUtil {
 		}
 	}
 
+	/**
+	 * Returns class field by its name. This method supports base classes as
+	 * well
+	 * 
+	 * @param clz
+	 * @param name
+	 * @return
+	 */
 	public static <T> Field getField(final Class<T> clz, final String name){
 	    Class<?> current = clz;
 	    while (current!=null){

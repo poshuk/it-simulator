@@ -20,9 +20,7 @@ import org.itsimulator.germes.app.model.entity.transport.TransportType;
 import org.itsimulator.germes.app.rest.dto.CityDTO;
 import org.itsimulator.germes.app.rest.service.base.BaseResource;
 import org.itsimulator.germes.app.service.GeographicService;
-import org.itsimulator.germes.app.service.impl.GeographicServiceImpl;
 import org.itsimulator.germes.app.service.transform.Transformer;
-import org.itsimulator.germes.app.service.transform.impl.SimpleDTOTransformer;
 
 @Path("cities")
 /**
@@ -45,9 +43,12 @@ public class CityResource extends BaseResource {
 	@Inject
 	public CityResource(GeographicService service, Transformer transformer) {
 		this.transformer = transformer;
+
 		this.service = service;
 		City city = new City("Odessa");
 		city.addStation(TransportType.AUTO);
+		city.setDistrict("Odessa");
+		city.setRegion("Odessa");
 		service.saveCity(city);
 	}
 
@@ -84,7 +85,7 @@ public class CityResource extends BaseResource {
 			return BAD_REQUEST;
 		}
 		
-		Optional<City> city = service.findCityById(NumberUtils.toInt(cityId));
+		Optional<City> city = service.findCitiyById(NumberUtils.toInt(cityId));
 		if (!city.isPresent()) {
 			return NOT_FOUND;
 		}

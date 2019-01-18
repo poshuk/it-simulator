@@ -1,6 +1,7 @@
 package org.itsimulator.germes.app.config;
 
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
+import org.itsimulator.germes.app.persistence.hibernate.SessionFactoryBuilder;
 import org.itsimulator.germes.app.persistence.repository.CityRepository;
 import org.itsimulator.germes.app.persistence.repository.inmemory.InMemoryCityRepository;
 import org.itsimulator.germes.app.service.GeographicService;

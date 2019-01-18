@@ -2,12 +2,21 @@ package org.itsimulator.germes.app.model.entity.base;
 
 import java.time.LocalDateTime;
 
-import org.itsimulator.germes.app.model.entity.person.Account;
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 
-import javax.persistence.*;
+import org.itsimulator.germes.app.model.entity.person.Account;
 
 /**
  * Base class for all business entities
+ * 
  * @author Morenets
  *
  */
@@ -40,6 +49,7 @@ public abstract class AbstractEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
 	public int getId() {
 		return id;
 	}
@@ -86,6 +96,13 @@ public abstract class AbstractEntity {
 		this.modifiedBy = modifiedBy;
 	}
 
+	@PrePersist
+	public void prePersist() {
+		if (getId() == 0) {
+			setCreatedAt(LocalDateTime.now());
+		}		
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

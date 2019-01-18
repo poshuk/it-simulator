@@ -8,6 +8,7 @@ import org.itsimulator.germes.app.model.entity.geography.Station;
 import org.itsimulator.germes.app.model.entity.transport.TransportType;
 import org.itsimulator.germes.app.model.search.criteria.StationCriteria;
 import org.itsimulator.germes.app.model.search.criteria.range.RangeCriteria;
+import org.itsimulator.germes.app.persistence.repository.inmemory.InMemoryCityRepository;
 import org.itsimulator.germes.app.service.impl.GeographicServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,7 +28,7 @@ public class GeographicServiceImplTest {
 
 	@Before
 	public void setup() {
-		service = new GeographicServiceImpl();
+		service = new GeographicServiceImpl(new InMemoryCityRepository());
 	}
 
 	@Test
@@ -51,14 +52,14 @@ public class GeographicServiceImplTest {
 		City city = new City("Odessa");
 		service.saveCity(city);
 
-		Optional<City> foundCity = service.findCityById(DEFAULT_CITY_ID);
+		Optional<City> foundCity = service.findCitiyById(DEFAULT_CITY_ID);
 		assertTrue(foundCity.isPresent());
 		assertEquals(foundCity.get().getId(), DEFAULT_CITY_ID);
 	}
 
 	@Test
 	public void testFindCityByIdNotFound() {
-		Optional<City> foundCity = service.findCityById(DEFAULT_CITY_ID);
+		Optional<City> foundCity = service.findCitiyById(DEFAULT_CITY_ID);
 		assertFalse(foundCity.isPresent());
 	}
 
@@ -97,7 +98,7 @@ public class GeographicServiceImplTest {
 		assertNotNull(stations);
 		assertEquals(stations.size(), 2);
 	}
-
+	
 	@Test
 	public void testSearchStationsByTransportTypeNotFound() {
 		City city = new City("Odessa");
@@ -107,9 +108,9 @@ public class GeographicServiceImplTest {
 		city2.setId(2);
 		city2.addStation(TransportType.RAILWAY);
 		service.saveCity(city2);
-
+		
 		List<Station> stations = service.searchStations(new StationCriteria(TransportType.AVIA), new RangeCriteria(1, 5));
 		assertNotNull(stations);
 		assertTrue(stations.isEmpty());
-	}
+	}	
 }

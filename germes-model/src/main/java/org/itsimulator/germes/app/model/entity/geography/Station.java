@@ -2,12 +2,19 @@ package org.itsimulator.germes.app.model.entity.geography;
 
 import java.util.Objects;
 
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import org.apache.commons.lang3.StringUtils;
 import org.itsimulator.germes.app.model.entity.base.AbstractEntity;
 import org.itsimulator.germes.app.model.entity.transport.TransportType;
 import org.itsimulator.germes.app.model.search.criteria.StationCriteria;
-
-import javax.persistence.*;
 
 /**
  * Station where passengers can get off or take specific kind
@@ -15,6 +22,8 @@ import javax.persistence.*;
  * @author Morenets
  *
  */
+@Table(name = "STATION")
+@Entity
 public class Station extends AbstractEntity {
 	private City city;
 	
@@ -41,11 +50,20 @@ public class Station extends AbstractEntity {
 	}
 
 	@ManyToOne(cascade = {}, fetch = FetchType.EAGER)
-	@JoinColumn(name = "CITY_ID")
+	@JoinColumn(name = "CITY_ID")	
 	public City getCity() {
 		return city;
 	}
+	
+	public void setCity(City city) {
+		this.city = city;
+	}
 
+	public void setTransportType(TransportType transportType) {
+		this.transportType = transportType;
+	}
+
+	@Embedded	
 	public Address getAddress() {
 		return address;
 	}
@@ -54,6 +72,7 @@ public class Station extends AbstractEntity {
 		this.address = address;
 	}
 
+	@Column(name = "PHONE", length=16)
 	public String getPhone() {
 		return phone;
 	}
@@ -62,6 +81,7 @@ public class Station extends AbstractEntity {
 		this.phone = phone;
 	}
 
+	@Embedded
 	public Coordinate getCoordinate() {
 		return coordinate;
 	}
@@ -70,8 +90,8 @@ public class Station extends AbstractEntity {
 		this.coordinate = coordinate;
 	}
 
-	@Enumerated(EnumType.STRING)
-	@Column(nullable = false, name = "TRANSPORT_TYPE")
+	@Enumerated
+	@Column(nullable=false, name="TRANSPORT_TYPE")
 	public TransportType getTransportType() {
 		return transportType;
 	}
@@ -132,4 +152,7 @@ public class Station extends AbstractEntity {
 			return false;
 		return true;
 	}
+	
+	
+
 }

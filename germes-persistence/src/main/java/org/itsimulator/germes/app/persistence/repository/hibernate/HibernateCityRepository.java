@@ -1,15 +1,13 @@
 package org.itsimulator.germes.app.persistence.repository.hibernate;
 
-import java.util.List;
-
-import javax.inject.Inject;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.itsimulator.germes.app.model.entity.base.AbstractEntity;
 import org.itsimulator.germes.app.model.entity.geography.City;
 import org.itsimulator.germes.app.persistence.hibernate.SessionFactoryBuilder;
 import org.itsimulator.germes.app.persistence.repository.CityRepository;
+
+import javax.inject.Inject;
+import java.util.List;
 
 public class HibernateCityRepository implements CityRepository {
 
@@ -24,10 +22,6 @@ public class HibernateCityRepository implements CityRepository {
 	public void save(City city) {
 
 		try (Session session = sessionFactory.openSession()) {
-			city.prePersist();
-			if (city.getStations() != null) {
-				city.getStations().forEach(AbstractEntity::prePersist);
-			}
 			session.saveOrUpdate(city);
 		}
 	}
@@ -51,10 +45,9 @@ public class HibernateCityRepository implements CityRepository {
 
 	@Override
 	public List<City> findAll() {
-		try (Session session = sessionFactory.openSession()) 
-			CriteriaQuery<City> criteriaQuery = session.getCriteriaBuilder().createQuery(City.class);
-			criteriaQuery.from(City.class);
-			return session.createQuery(criteriaQuery).getResultList();
+		try (Session session = sessionFactory.openSession()) {
+			return session.createCriteria(City.class).list();
+
 		}
 	}
 }

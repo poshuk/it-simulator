@@ -1,12 +1,5 @@
 package org.itsimulator.germes.app.persistence.hibernate;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-
-import javax.annotation.PreDestroy;
-import javax.persistence.PersistenceException;
-
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -16,6 +9,13 @@ import org.itsimulator.germes.app.model.entity.geography.City;
 import org.itsimulator.germes.app.model.entity.geography.Coordinate;
 import org.itsimulator.germes.app.model.entity.geography.Station;
 import org.itsimulator.germes.app.model.entity.person.Account;
+import org.itsimulator.germes.app.persistence.hibernate.interceptor.TimestampInterceptor;
+
+import javax.annotation.PreDestroy;
+import javax.persistence.PersistenceException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 /**
  * Component that is responsible for managing Hibernate session factory
@@ -38,7 +38,10 @@ public class SessionFactoryBuilder {
 		sources.addAnnotatedClass(Address.class);
 		sources.addAnnotatedClass(Account.class);
 		
-		sessionFactory = sources.buildMetadata().buildSessionFactory();
+		org.hibernate.boot.SessionFactoryBuilder builder = sources.getMetadataBuilder().build().
+				getSessionFactoryBuilder().applyInterceptor(new TimestampInterceptor());
+		
+		sessionFactory = builder.build();
 	}
 
 	private Properties loadProperties() {

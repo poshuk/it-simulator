@@ -6,6 +6,8 @@ target/
 .project
 .log
 .iml
+.idea/
+schema_MySQL5Dialect.sql
 
 # User-specific stuff:
 .idea/workspace.xml

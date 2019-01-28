@@ -1,20 +1,12 @@
 package org.itsimulator.germes.app.model.entity.geography;
 
-import java.util.Objects;
-
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
 import org.apache.commons.lang3.StringUtils;
 import org.itsimulator.germes.app.model.entity.base.AbstractEntity;
 import org.itsimulator.germes.app.model.entity.transport.TransportType;
 import org.itsimulator.germes.app.model.search.criteria.StationCriteria;
+
+import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * Station where passengers can get off or take specific kind
@@ -25,6 +17,10 @@ import org.itsimulator.germes.app.model.search.criteria.StationCriteria;
 @Table(name = "STATION")
 @Entity
 public class Station extends AbstractEntity {
+	public static final String FIELD_TRANSPORT_TYPE = "transportType";
+
+	public static final String FIELD_CITY = "city";
+
 	private City city;
 	
 	private Address address;
